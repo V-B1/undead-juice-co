@@ -1,0 +1,157 @@
+:root {
+  --background: #1a1226;
+  --panel: #2a1f3d;
+  --outline: #1f1430;
+  --coin: #ffd23f;
+  --plutonium: #7dff6a;
+  --accent: #ff8a3d;
+  --text: #fff6df;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-right: env(safe-area-inset-right, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --safe-left: env(safe-area-inset-left, 0px);
+  font-family: system-ui, sans-serif;
+  color: var(--text);
+  background: var(--background);
+  -webkit-tap-highlight-color: transparent;
+}
+
+* {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  overflow: hidden;
+  overscroll-behavior: none;
+  touch-action: none;
+  background: var(--background);
+  position: fixed;
+  inset: 0;
+}
+#game,
+#ui,
+#rotate {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100dvh;
+}
+#game canvas {
+  display: block;
+}
+#ui {
+  pointer-events: none;
+  z-index: 10;
+}
+button {
+  pointer-events: auto;
+  min-width: 88px;
+  min-height: 48px;
+  padding: 10px 28px;
+  border: 4px solid var(--outline);
+  border-radius: 18px;
+  background: var(--coin);
+  color: var(--outline);
+  font:
+    24px 'Lilita One',
+    system-ui;
+  box-shadow:
+    inset 0 2px #fff6df80,
+    0 5px var(--outline);
+  cursor: pointer;
+  touch-action: manipulation;
+}
+button:active {
+  transform: translateY(2px);
+  box-shadow:
+    inset 0 2px #fff6df80,
+    0 3px var(--outline);
+}
+button:focus-visible {
+  outline: 3px solid var(--plutonium);
+  outline-offset: 3px;
+}
+.pulse {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+@keyframes pulse {
+  50% {
+    scale: 1.06;
+  }
+}
+.scene-controls {
+  position: absolute;
+}
+.scene-controls.center {
+  left: 50%;
+  top: 62%;
+  transform: translate(-50%, -50%);
+}
+.scene-controls.back {
+  left: calc(var(--safe-left) + 28px);
+  bottom: calc(var(--safe-bottom) + 28px);
+}
+.toasts {
+  position: absolute;
+  top: calc(var(--safe-top) + 16px);
+  left: calc(var(--safe-left) + 12px);
+  right: calc(var(--safe-right) + 12px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+.toast {
+  max-width: min(600px, 100%);
+  background: var(--panel);
+  border: 4px solid var(--outline);
+  border-radius: 18px;
+  box-shadow: inset 0 2px #ffffff22;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+#rotate {
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 28px;
+  background: var(--background);
+}
+#rotate[hidden] {
+  display: none;
+}
+h1 {
+  font:
+    36px 'Lilita One',
+    system-ui;
+  margin: 18px 0 0;
+}
+#rotate p {
+  max-width: 28ch;
+}
+.fps {
+  position: absolute;
+  bottom: calc(var(--safe-bottom) + 8px);
+  right: calc(var(--safe-right) + 8px);
+  padding: 4px 8px;
+  border-radius: 8px;
+  background: #1a1226dd;
+  color: var(--plutonium);
+  font:
+    14px 'Lilita One',
+    system-ui;
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
